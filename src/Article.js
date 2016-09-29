@@ -1,33 +1,29 @@
 import React, { Component } from 'react'
+import CommentButton from './CommentButton'
+
 
 export default class Article extends Component {
 
     constructor(props) {
         super()
         this.state = {
-            isOpen: false,
-            foo: 'bar'
+            isOpen: false
         }
     }
 
-/*
-    state = {
-        isOpen: false,
-        foo: 'bar'
-    }
-*/
 
     render() {
         const { article } = this.props
         const { isOpen } = this.state
-        console.log('---', this.state)
 
         const body = isOpen ? <section>{article.text}</section> : null
-        // <section style = {{display: isOpen ? 'block' : 'none'}}>{article.text}</section>
+        const articleComments = <CommentButton comments = {article.comments} isOpen = {this.state.isOpen}/>
+
         return (
             <div>
                 <h3 onClick = {this.toggleOpen}>{article.title}</h3>
                 {body}
+                {articleComments}
             </div>
         )
     }
@@ -39,13 +35,3 @@ export default class Article extends Component {
     }
 }
 
-/*
-export default (props) => {
-    const { article } = props
-    return (
-        <div>
-            <h3>{article.title}</h3>
-            <section>{article.text}</section>
-        </div>
-    )
-}*/
