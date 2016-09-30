@@ -8,6 +8,7 @@ export default class CommentSection extends Component {
     render() {
         console.log(this.props.isOpen)
         const {comments} = this.props
+        //аналогично isOpen здесь все только усложняет
         const {isOpen}   = this.props
         const articleComments = comments ? comments.map(c => <li key={c.id} >{c.text}</li>) : null;
         return (
