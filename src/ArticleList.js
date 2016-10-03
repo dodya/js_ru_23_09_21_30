@@ -1,42 +1,35 @@
-import React, { Component } from 'react'
-import Article from './Article'
-import Chart from './Chart'
+import React, {Component, PropTypes} from "react";
+import Article from "./Article";
+import Chart from "./Chart";
+import accordion from "./decorators/accordion";
 
-class ArticleList extends Component {
-    static propTypes = {
 
-    };
-
-    state = {
-        openArticleId: null
-    }
-
-    render() {
-        const { articles } = this.props
-        const { openArticleId } = this.state
-
-        const articleComponents = articles.map(article => (
-            <li key={article.id}>
-                <Article article = {article} isOpen = {article.id == openArticleId}
-                         openArticle = {this.toggleArticle(article.id)}/>
-            </li>
-            )
-        )
-        return (
-            <div>
-                <ul>
-                    {articleComponents}
-                </ul>
-                <Chart />
-            </div>
-        )
-    }
-
-    toggleArticle = id => ev => {
-        this.setState({
-            openArticleId: id
-        })
-    }
+ArticleList.propTypes = {
+    openItemId: PropTypes.string,
+    articles: PropTypes.array.isRequired,
+    toggleOpen: PropTypes.func.isRequired
 }
 
-export default ArticleList
+
+function ArticleList(props) {
+    const {articles, openedArticleId, toggleOpen} = props
+    const articleComponents = articles.map(article => (
+            <li key={article.id}>
+                <Article article={article} isOpen={article.id == openedArticleId}
+                         openArticle={toggleOpen(article.id)}/>
+            </li>
+        )
+    )
+
+    return (
+        <div>
+            <ul>
+                {articleComponents}
+            </ul>
+            <Chart />
+        </div>
+    )
+}
+
+
+export default accordion(ArticleList)

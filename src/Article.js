@@ -1,10 +1,22 @@
-import React, { Component } from 'react'
-import CommentList from './CommentList'
+import React, {Component, PropTypes} from "react";
+import CommentList from "./CommentList";
 
 export default class Article extends Component {
-    static defaultProps = {
 
+    static propTypes = {
+        article: PropTypes.shape({
+            comments: PropTypes.array,
+            text: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired
+        }),
+        isOpen: PropTypes.bool,
+        openArticle: PropTypes.func.isRequired
     }
+
+    static defaultProps = {
+        isOpen: false
+    }
+
     componentWillMount() {
         console.log('---', 'mounting')
     }
@@ -24,21 +36,21 @@ export default class Article extends Component {
         }
     }
 
-/*
-    state = {
-        isOpen: false,
-        foo: 'bar'
-    }
-*/
+    /*
+     state = {
+     isOpen: false,
+     foo: 'bar'
+     }
+     */
 
     render() {
-        const { article, isOpen, openArticle } = this.props
+        const {article, isOpen, openArticle} = this.props
 
-        const body = isOpen ? <section>{article.text}<CommentList comments = {article.comments} /></section> : null
+        const body = isOpen ? <section>{article.text}<CommentList comments={article.comments}/></section> : null
         // <section style = {{display: isOpen ? 'block' : 'none'}}>{article.text}</section>
         return (
             <div>
-                <h3 onClick = {openArticle}>{article.title}</h3>
+                <h3 onClick={openArticle}>{article.title}</h3>
                 {body}
             </div>
         )
@@ -50,14 +62,3 @@ export default class Article extends Component {
         })
     }
 }
-
-/*
-export default (props) => {
-    const { article } = props
-    return (
-        <div>
-            <h3>{article.title}</h3>
-            <section>{article.text}</section>
-        </div>
-    )
-}*/

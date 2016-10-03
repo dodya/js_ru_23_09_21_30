@@ -1,9 +1,15 @@
-import React, { Component, PropTypes } from 'react'
-import Comment from './Comment'
-import toggleOpen from './decorators/toggleOpen'
+import React, {Component, PropTypes} from "react";
+import Comment from "./Comment";
+import toggleOpen from "./decorators/toggleOpen";
+
+CommentList.propTypes = {
+    isOpen: PropTypes.bool,
+    comments: PropTypes.array,
+    toggleOpen: PropTypes.func.isRequired
+};
 
 function CommentList(props) {
-    const { comments, isOpen, toggleOpen } = props
+    const {comments, isOpen, toggleOpen} = props
     if (!comments || !comments.length) return <p>No comments yet</p>
 
     const commentItems = comments.map(comment => <li key={comment.id}><Comment comment={comment}/></li>)

@@ -1,10 +1,10 @@
-import React, { PropTypes } from 'react'
+import React, {PropTypes} from "react";
 
 function Comment(props) {
     const { text, user } = props.comment
     return (
         <p>
-            {text} <strong>by {user}</strong>
+            {text} <strong>[{user}]</strong>
         </p>
     )
 }
