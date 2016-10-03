@@ -6,6 +6,7 @@ import React, {Component} from "react";
 export default function accordion(ComponentToRender) {
     return class Accordion extends Component {
         state = {
+            //Не привязывайся к названию сущности, декоратор будет использоваться везде. Назови, скажем, openItemId
             openedArticleId: null
         }
 
